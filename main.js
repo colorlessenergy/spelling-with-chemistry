@@ -136,7 +136,7 @@ send.addEventListener("click", function () {
   console.log(data.value)
   word.push(data.value.split(""))
   console.log(word[0].length);
-  while (word[0].length !== 0) {
+    while (word[0].length !== 0) {
   for (var j = 0; j < chemistryArr.length; j++) {
     if (chemistryArr[j].SI.toLowerCase() == word[0][0] + word[0][1]) {
       console.log("MaTCH found");
