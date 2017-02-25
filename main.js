@@ -155,4 +155,6 @@ send.addEventListener("click", function () {
     }
     p.innerHTML = completeWord.map(e => e.SI).join("") + " ("+ completeWord.map(e => e.Element.toLowerCase()).join(", ") + ")";
   }
+  completeWord = [];
+  word = [];
 });
