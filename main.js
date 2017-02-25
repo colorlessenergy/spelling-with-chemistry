@@ -133,25 +133,27 @@ for (var i = 0; i < arr.length; i++) {
 };
 
 send.addEventListener("click", function () {
-  console.log(data.value)
-  word.push(data.value.split(""))
-  console.log(word[0].length);
-    while (word[0].length !== 0) {
-  for (var j = 0; j < chemistryArr.length; j++) {
-    if (chemistryArr[j].SI.toLowerCase() == word[0][0] + word[0][1]) {
-      console.log("MaTCH found");
-      console.log(word[0][0]);
-      completeWord.push(chemistryArr[j].SI);
-      word[0].splice(0, 2);
-      console.log(completeWord);
-    } else if (chemistryArr[j].SI.toLowerCase() == word[0][0]) {
-      completeWord.push(chemistryArr[j].SI);
-      console.log(completeWord);
-      word[0].splice(0, 1);
+  word = data.value;
+
+  // protection against infinite loop
+  var i = 1000;
+                            // protection against infinite loop
+	while (word.length > 0 && i > 0) {
+  	var element = chemistryArr.find(function(e){
+			var symbol = e.SI.toLowerCase();
+      return word.toLowerCase() === symbol || (word[0] + word[1]).toLowerCase() === symbol;
+    });
+
+    if(element) {
+    	completeWord.push(element);
+      console.log(element);
+      word.slice(0, element.SI.length);
     } else {
-      break;
+      word.slice(0, 1);
     }
+
+    i -= 1; // protection against infinite loop
   }
-}
-  console.log(word[0].length);
+
+  console.log(completeWord);
 });
