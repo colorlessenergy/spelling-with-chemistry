@@ -119,14 +119,15 @@ var arr = [1,"H"," Hydrogen"," 1.00794",
 var chemistryArr = [];
 var data = document.getElementById("data");
 var send = document.getElementById("send");
+var p = document.getElementById("result")
 var completeWord = [];
 var word = [];
 for (var i = 0; i < arr.length; i++) {
   if (typeof arr[i] === 'number') {
     chemistryArr.push({
       "atomic-number": arr[i],
-      "SI": arr[i+1],
-      "Element": arr[i+2],
+      "SI": arr[i+1].trim(),
+      "Element": arr[i+2].trim(),
       "atomic-weight": arr[i+3]
     });
   }
@@ -134,26 +135,24 @@ for (var i = 0; i < arr.length; i++) {
 
 send.addEventListener("click", function () {
   word = data.value;
-
-  // protection against infinite loop
-  var i = 1000;
-                            // protection against infinite loop
 	while (word.length > 0 && i > 0) {
-  	var element = chemistryArr.find(function(e){
+  	var matchingElements = chemistryArr.filter(function(e){
 			var symbol = e.SI.toLowerCase();
-      return word.toLowerCase() === symbol || (word[0] + word[1]).toLowerCase() === symbol;
+      return word.toLowerCase().startsWith(symbol);
     });
+
+    var element = matchingElements.sort(function (e) {
+      return e["atomic-weight"];
+    })[0]
 
     if(element) {
     	completeWord.push(element);
       console.log(element);
-      word.slice(0, element.SI.length);
+      word = word.slice(element.SI.length);
     } else {
-      word.slice(0, 1);
+      //protection from infinte loop
+      word = word.slice(1);
     }
-
-    i -= 1; // protection against infinite loop
+    p.innerHTML = completeWord.map(e => e.SI).join("") + " ("+ completeWord.map(e => e.Element.toLowerCase()).join(", ") + ")";
   }
-
-  console.log(completeWord);
 });
