@@ -157,4 +157,11 @@ send.addEventListener("click", function () {
   }
   completeWord = [];
   word = [];
+  data.value = "";
 });
+
+data.addEventListener("keyup", function (e) {
+  if (e.keyCode === 13) {
+    send.click()
+  }
+})

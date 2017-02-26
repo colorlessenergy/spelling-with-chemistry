@@ -1,0 +1,45 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.desc {
+  align-items: center;
+  background-color: #2D4471;
+  color: #fff;
+  display: flex;
+  font-family: 'Baloo', cursive;
+  font-size: 28px;
+  height: 200px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.desc p {
+  margin: 0;
+  padding: 0;
+}
+
+.info, .result {
+  align-items: center;
+  background-color: #113B51;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  font-family: 'Baloo', cursive;
+  font-size: 28px;
+  height: 300px;
+  justify-content: center;
+}
+
+.result {
+  background-color: #09093B;
+  height: 300px;
+}
+
+.result p {
+  margin: 0;
+  padding: 0;
+}
